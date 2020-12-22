@@ -1,13 +1,13 @@
-import en from "./en";
-import ru from "./ru";
+import eng from "./en";
+import rus from "./ru";
 import ukr from "./ukr";
 
 export default {
-  en: {
-    message: en
+  eng: {
+    message: eng
   },
-  ru: {
-    message: ru
+  rus: {
+    message: rus
   },
   ukr: {
     message: ukr

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import EmptyLayout from "./layouts/empty-layout";
-import DefaultLayout from "./layouts/default-layout";
+import EmptyLayout from "@/layouts/empty-layout";
+import DefaultLayout from "@/layouts/default-layout";
 
 export default {
   name: "App",
