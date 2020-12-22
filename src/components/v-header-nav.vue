@@ -6,12 +6,18 @@
     ></v-app-bar-nav-icon>
 
     <v-spacer></v-spacer>
-    <div>ENG<v-icon color="black">mdi-arrow-drop-down</v-icon></div>
-    <v-btn text class="pa-2">ENG<v-icon>mdi-expand_more</v-icon></v-btn>
-    <v-menu open-on-hover top offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn text v-bind="attrs" v-on="on">
+
+    <v-menu open-on-hover offset-y>
+      <template v-slot:activator="{ on, attrs, value }">
+        <v-btn
+          text
+          v-bind="attrs"
+          v-on="on"
+          class="pa-1"
+          :class="{ warning: value }"
+        >
           {{ lang[selectedLang].title }}
+          <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
       </template>
 
@@ -27,12 +33,20 @@
         </v-list-item-group>
       </v-list>
     </v-menu>
+
+    <v-btn icon class="ml-2 mr-4" @click="changeTh">
+      <v-icon large>mdi-brightness-6</v-icon>
+    </v-btn>
+    <v-btn icon class="ml-2 mr-4" @click="changeTh">
+      <v-icon large>mdi-image-filter-black-white</v-icon>
+    </v-btn>
     <v-btn outlined>
       {{ $t("message.login") }}
     </v-btn>
+
     <v-menu bottom left>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn dark icon v-bind="attrs" v-on="on">
+        <v-btn icon v-bind="attrs" v-on="on">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
@@ -64,6 +78,15 @@ export default {
         this.$i18n.locale = locale;
         localStorage.setItem("currentLanguage", locale);
       }
+    },
+    changeTh() {
+      this.$vuetify.theme.dark
+        ? (this.$vuetify.theme.dark = false)
+        : (this.$vuetify.theme.dark = true);
+      localStorage.setItem(
+        "theme",
+        this.$vuetify.theme.dark ? "dark" : "light"
+      );
     }
   }
 };
