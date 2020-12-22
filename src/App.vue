@@ -1,9 +1,5 @@
 <template>
-  <component :is="layout">
-    <keep-alive>
-      <router-view />
-    </keep-alive>
-  </component>
+  <component :is="layout"></component>
 </template>
 
 <script>
@@ -27,16 +23,6 @@ export default {
   data: () => ({
     //
   }),
-  methods: {
-    changeTh() {
-      this.$vuetify.theme.dark
-        ? (this.$vuetify.theme.dark = false)
-        : (this.$vuetify.theme.dark = true);
-      localStorage.setItem(
-        "theme",
-        this.$vuetify.theme.dark ? "dark" : "light"
-      );
-    }
-  }
+  methods: {}
 };
 </script>

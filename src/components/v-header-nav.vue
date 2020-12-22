@@ -5,6 +5,14 @@
       @click="$emit('handleDrawer')"
     ></v-app-bar-nav-icon>
 
+    <v-toolbar-title class="hidden-sm-and-down">
+      Calvary chapel
+    </v-toolbar-title>
+
+    <v-toolbar-title class="hidden-md-and-up">
+      CC
+    </v-toolbar-title>
+
     <v-spacer></v-spacer>
 
     <v-menu open-on-hover offset-y>
@@ -26,21 +34,27 @@
         <v-divider></v-divider>
         <v-list-item-group v-model="selectedLang">
           <v-list-item v-for="item in lang" :key="item.title">
-            <v-list-item-title @click="switchLocale(item.lang)">{{
-              item.value
-            }}</v-list-item-title>
+            <v-list-item-title @click="switchLocale(item.lang)">
+              {{ item.value }}
+            </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-menu>
 
     <v-btn icon class="ml-2 mr-4" @click="changeTh">
-      <v-icon large>mdi-brightness-6</v-icon>
+      <v-icon>mdi-invert-colors</v-icon>
     </v-btn>
-    <v-btn icon class="ml-2 mr-4" @click="changeTh">
-      <v-icon large>mdi-image-filter-black-white</v-icon>
-    </v-btn>
-    <v-btn outlined>
+
+    <v-btn
+      outlined
+      @click="
+        $router.push({
+          path: 'login',
+          query: { mess: 'needLoggin' }
+        })
+      "
+    >
       {{ $t("message.login") }}
     </v-btn>
 

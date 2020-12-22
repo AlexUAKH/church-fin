@@ -2,7 +2,6 @@
   <div>
     <h2>
       login
-      <p>{{ $t("message.hello") }}</p>
     </h2>
     <ul>
       <li v-for="l of lang" :key="l" @click="switchLocale(l)">
