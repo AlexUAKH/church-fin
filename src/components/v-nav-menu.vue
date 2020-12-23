@@ -3,7 +3,7 @@
     <v-list nav>
       <v-list-item-group color="primary">
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in menuItems"
           :key="i"
           tag="router-link"
           :to="item.to"
@@ -24,10 +24,26 @@
 export default {
   data: () => ({
     items: [
-      { text: "Real-Time", icon: "mdi-clock", to: "/" },
-      { text: "Audience", icon: "mdi-account", to: "login" },
-      { text: "Conversions", icon: "mdi-flag", to: "/" }
+      { text: "Dashboard", icon: "mdi-home", to: "/", quest: true },
+      { text: "Table", icon: "mdi-table", to: "table", quest: true },
+      { text: "Income", icon: "mdi-arrow-right", to: "invome", quest: false },
+      { text: "Outcome", icon: "mdi-arrow-left", to: "outcome", quest: false },
+      { text: "Analitic", icon: "mdi-flag", to: "analitic", quest: true },
+      { text: "Profile", icon: "mdi-account", to: "profile", quest: false },
+      { text: "Sign In", icon: "mdi-login", to: "login", quest: true },
+      { text: "Logout", icon: "mdi-logout", to: "logout", quest: false }
     ]
-  })
+  }),
+  computed: {
+    menuItems() {
+      const user = false;
+      if (user) {
+        return this.items.filter(i => i.text !== "Sign In");
+      }
+      const t = this.items.filter(i => i.quest === true);
+      console.log("t :", t);
+      return t;
+    }
+  }
 };
 </script>
