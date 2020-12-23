@@ -39,10 +39,9 @@ export default {
       const user = false;
       if (user) {
         return this.items.filter(i => i.text !== "Sign In");
+      } else {
+        return this.items.filter(i => i.quest === true);
       }
-      const t = this.items.filter(i => i.quest === true);
-      console.log("t :", t);
-      return t;
     }
   }
 };

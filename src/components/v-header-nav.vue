@@ -42,20 +42,33 @@
       </v-list>
     </v-menu>
 
-    <v-btn icon class="ml-2 mr-4" @click="changeTh">
+    <v-btn icon class="ml-0 mr-0 mr-md-3" @click="changeTheme">
       <v-icon>mdi-invert-colors</v-icon>
     </v-btn>
 
     <v-btn
       outlined
+      class="hidden-sm-and-down"
       @click="
         $router.push({
           path: 'login',
-          query: { mess: 'needLoggin' }
+          query: { mess: 'needLogin' }
         })
       "
     >
-      {{ $t("message.login") }}
+      <span>{{ $t("message.login") }}</span>
+    </v-btn>
+    <v-btn
+      icon
+      class="hidden-md-and-up"
+      @click="
+        $router.push({
+          path: 'login',
+          query: { mess: 'needLogin' }
+        })
+      "
+    >
+      <v-icon>mdi-login</v-icon>
     </v-btn>
 
     <v-menu bottom left>
@@ -93,7 +106,7 @@ export default {
         localStorage.setItem("currentLanguage", locale);
       }
     },
-    changeTh() {
+    changeTheme() {
       this.$vuetify.theme.dark
         ? (this.$vuetify.theme.dark = false)
         : (this.$vuetify.theme.dark = true);

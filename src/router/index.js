@@ -12,10 +12,21 @@ const routes = [
     component: Home
   },
   {
+    path: "/table",
+    name: "Table",
+    meta: "main",
+    component: () => import("../views/In-progress.vue")
+  },
+  {
     path: "/login",
     name: "Login",
     meta: "empty",
     component: () => import("../views/Login.vue")
+  },
+  {
+    path: "**",
+    meta: "main",
+    component: () => import("../views/404.vue")
   }
 ];
 
