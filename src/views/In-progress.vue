@@ -22,9 +22,3 @@
   </v-card>
 </template>
 <script>
-export default {
-  created() {
-    console.log("props: ", this.$route);
-  }
-};
-</script>
