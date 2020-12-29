@@ -1,5 +1,21 @@
 <template>
-  <v-card class="mx-auto pa-4" max-width="600" elevation="4">
+  <v-card class="pa-4 mx-auto" max-width="600" elevation="4">
+    <v-fab-transition>
+      <v-btn
+        class="mr-sm-n9 mr-n4 mt-sm-0 mt-5"
+        v-show="true"
+        color="pink"
+        fab
+        dark
+        small
+        absolute
+        top
+        right
+        @click="$router.go(-1)"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-fab-transition>
     <v-container fluid>
       <v-row justify="center">
         <v-col class="subtitle-1 text-center" cols="12">
@@ -127,4 +143,8 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.close_btn {
+  top: 50px;
+}
+</style>
