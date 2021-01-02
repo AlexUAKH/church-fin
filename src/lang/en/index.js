@@ -1,4 +1,5 @@
 export default {
   login: "Sign in",
-  language: "Language"
+  language: "Language",
+  dateRange: "Date range"
 };

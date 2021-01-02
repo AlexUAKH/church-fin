@@ -28,7 +28,7 @@ export default {
       { text: "Table", icon: "mdi-table", to: "table", quest: true },
       { text: "Income", icon: "mdi-arrow-right", to: "invome", quest: false },
       { text: "Outcome", icon: "mdi-arrow-left", to: "outcome", quest: false },
-      { text: "Analitic", icon: "mdi-flag", to: "analitic", quest: true },
+      { text: "Analitic", icon: "mdi-poll", to: "analitic", quest: true },
       { text: "Profile", icon: "mdi-account", to: "profile", quest: false },
       { text: "Sign In", icon: "mdi-login", to: "login", quest: true },
       { text: "Logout", icon: "mdi-logout", to: "logout", quest: false }

@@ -15,6 +15,12 @@ const routes = [
     path: "/table",
     name: "Table",
     meta: "main",
+    component: () => import("../views/Table.vue")
+  },
+  {
+    path: "/analitic",
+    name: "Analitic",
+    meta: "main",
     component: () => import("../views/In-progress.vue")
   },
   {

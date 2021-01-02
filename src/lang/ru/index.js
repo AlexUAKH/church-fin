@@ -1,4 +1,5 @@
 export default {
   login: "Войти",
-  language: "Язык"
+  language: "Язык",
+  dateRange: "Диапазон дат"
 };

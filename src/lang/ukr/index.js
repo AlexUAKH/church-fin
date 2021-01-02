@@ -1,4 +1,5 @@
 export default {
   login: "Увійти",
-  language: "Мова"
+  language: "Мова",
+  dateRange: "Проміжок часу"
 };

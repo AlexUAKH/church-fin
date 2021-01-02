@@ -17,9 +17,7 @@
         </v-row>
       </template>
     </v-img>
-    <v-card-title
-      >Страница не найдена {{ date | date("datetime") }}</v-card-title
-    >
+    <v-card-title>Страница не найдена</v-card-title>
     <v-card-actions>
       <v-btn text color="warning">
         <v-icon>mdi-arrow-left</v-icon>

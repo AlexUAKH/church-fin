@@ -15,7 +15,9 @@
         <v-col>
           <v-container fluid>
             <!-- If using vue-router -->
-            <router-view></router-view>
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </v-container>
         </v-col>
         <!-- Provides the application the proper gutter -->
