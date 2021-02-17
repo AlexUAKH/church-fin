@@ -30,7 +30,7 @@
       </template>
 
       <v-list>
-        <v-subheader>{{ $t("message.language") }}</v-subheader>
+        <v-subheader>{{ $t('message.language') }}</v-subheader>
         <v-divider></v-divider>
         <v-list-item-group v-model="selectedLang">
           <v-list-item v-for="item in lang" :key="item.title">
@@ -52,11 +52,11 @@
       @click="
         $router.push({
           path: 'login',
-          query: { mess: 'needLogin' }
+          query: { mess: 'needLogin' },
         })
       "
     >
-      <span>{{ $t("message.login") }}</span>
+      <span>{{ $t('message.login') }}</span>
     </v-btn>
     <v-btn
       icon
@@ -64,7 +64,7 @@
       @click="
         $router.push({
           path: 'login',
-          query: { mess: 'needLogin' }
+          query: { mess: 'needLogin' },
         })
       "
     >
@@ -91,19 +91,20 @@
 export default {
   data: () => ({
     lang: [
-      { title: "En", value: "English", lang: "eng" },
-      { title: "Ру", value: "Русский", lang: "rus" },
-      { title: "Ук", value: "Украинский", lang: "ukr" }
+      { title: 'En', value: 'English', lang: 'eng' },
+      { title: 'Ру', value: 'Русский', lang: 'rus' },
+      { title: 'Ук', value: 'Украинский', lang: 'ukr' },
     ],
-    selectedLang: process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(",").indexOf(
-      localStorage.getItem("currentLanguage") || "eng"
-    )
+    selectedLang:
+      process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(',').indexOf(
+        localStorage.getItem('currentLanguage') || 'eng'
+      ) || 0,
   }),
   methods: {
     switchLocale(locale) {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
-        localStorage.setItem("currentLanguage", locale);
+        localStorage.setItem('currentLanguage', locale);
       }
     },
     changeTheme() {
@@ -111,10 +112,10 @@ export default {
         ? (this.$vuetify.theme.dark = false)
         : (this.$vuetify.theme.dark = true);
       localStorage.setItem(
-        "theme",
-        this.$vuetify.theme.dark ? "dark" : "light"
+        'theme',
+        this.$vuetify.theme.dark ? 'dark' : 'light'
       );
-    }
-  }
+    },
+  },
 };
 </script>

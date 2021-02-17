@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="300" tile height="100vh">
+  <v-card class="mx-auto" max-width="300" tile style="height:100%">
     <v-list nav>
       <v-list-item-group color="primary">
         <v-list-item
@@ -22,25 +22,66 @@
 
 <script>
 export default {
-  data: () => ({
-    items: [
-      { text: "Dashboard", icon: "mdi-home", to: "/", quest: true },
-      { text: "Table", icon: "mdi-table", to: "table", quest: true },
-      { text: "Income", icon: "mdi-arrow-right", to: "invome", quest: false },
-      { text: "Outcome", icon: "mdi-arrow-left", to: "outcome", quest: false },
-      { text: "Analitic", icon: "mdi-poll", to: "analitic", quest: true },
-      { text: "Profile", icon: "mdi-account", to: "profile", quest: false },
-      { text: "Sign In", icon: "mdi-login", to: "login", quest: true },
-      { text: "Logout", icon: "mdi-logout", to: "logout", quest: false }
-    ]
-  }),
+  data: () => ({}),
   computed: {
+    items() {
+      return [
+        {
+          text: this.$t("message.dashboard"),
+          icon: "mdi-home",
+          to: "/",
+          quest: true
+        },
+        {
+          text: this.$t("message.table"),
+          icon: "mdi-table",
+          to: "table",
+          quest: true
+        },
+        {
+          text: this.$t("message.income"),
+          icon: "mdi-arrow-right",
+          to: "invome",
+          quest: false
+        },
+        {
+          text: this.$t("message.outcome"),
+          icon: "mdi-arrow-left",
+          to: "outcome",
+          quest: false
+        },
+        {
+          text: this.$t("message.offering"),
+          icon: "mdi-poll",
+          to: "offering",
+          quest: true
+        },
+        {
+          text: this.$t("message.profile"),
+          icon: "mdi-account",
+          to: "profile",
+          quest: false
+        },
+        {
+          text: this.$t("message.login"),
+          icon: "mdi-login",
+          to: "login",
+          quest: true
+        },
+        {
+          text: this.$t("message.logout"),
+          icon: "mdi-logout",
+          to: "logout",
+          quest: false
+        }
+      ];
+    },
     menuItems() {
-      const user = false;
+      const user = this.$store.getters.isLoggedIn;
       if (user) {
-        return this.items.filter(i => i.text !== "Sign In");
+        return this.items.filter((i) => i.text !== "Sign In");
       } else {
-        return this.items.filter(i => i.quest === true);
+        return this.items.filter((i) => i.quest === true);
       }
     }
   }

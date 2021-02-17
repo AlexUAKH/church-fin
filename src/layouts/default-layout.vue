@@ -6,21 +6,18 @@
       <v-nav-menu></v-nav-menu>
     </v-navigation-drawer>
 
-    <!-- Sizes your content based upon application components -->
     <v-main>
-      <v-row>
+      <v-row style="height: 100%">
         <v-col cols="3" class="hidden-sm-and-down">
           <v-nav-menu></v-nav-menu>
         </v-col>
         <v-col>
           <v-container fluid>
-            <!-- If using vue-router -->
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
           </v-container>
         </v-col>
-        <!-- Provides the application the proper gutter -->
       </v-row>
     </v-main>
 
