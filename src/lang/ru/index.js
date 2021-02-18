@@ -8,5 +8,7 @@ export default {
   income: "Поступления", //"Income"
   outcome: "Расходы", //"Outcome"
   offering: "Пожертвования", //"Offering"
-  profile: "Профиль" //"Profile"
+  profile: "Профиль", //"Profile"
+  save: "Сохранить",
+  cansel: "Отмена"
 };

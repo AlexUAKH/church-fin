@@ -8,5 +8,7 @@ export default {
   income: "Income",
   outcome: "Outcome",
   offering: "Offering",
-  profile: "Profile"
+  profile: "Profile",
+  save: "Save",
+  cansel: "Cansel"
 };

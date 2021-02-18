@@ -15,6 +15,7 @@
 
     <v-spacer></v-spacer>
 
+    <!-- Language selectio -->
     <v-menu open-on-hover offset-y>
       <template v-slot:activator="{ on, attrs, value }">
         <v-btn
@@ -30,7 +31,7 @@
       </template>
 
       <v-list>
-        <v-subheader>{{ $t('message.language') }}</v-subheader>
+        <v-subheader>{{ $t("message.language") }}</v-subheader>
         <v-divider></v-divider>
         <v-list-item-group v-model="selectedLang">
           <v-list-item v-for="item in lang" :key="item.title">
@@ -42,33 +43,47 @@
       </v-list>
     </v-menu>
 
+    <!-- Theme selection -->
     <v-btn icon class="ml-0 mr-0 mr-md-3" @click="changeTheme">
       <v-icon>mdi-invert-colors</v-icon>
     </v-btn>
 
     <v-btn
+      v-if="!isLoggedIn"
       outlined
       class="hidden-sm-and-down"
       @click="
         $router.push({
           path: 'login',
-          query: { mess: 'needLogin' },
+          query: { mess: 'needLogin' }
         })
       "
     >
-      <span>{{ $t('message.login') }}</span>
+      <span>{{ $t("message.login") }}</span>
     </v-btn>
     <v-btn
+      v-if="isLoggedIn"
+      outlined
+      class="hidden-sm-and-down"
+      @click="logout"
+    >
+      <span>{{ $t("message.logout") }}</span>
+    </v-btn>
+    <v-btn
+      v-if="!isLoggedIn"
       icon
       class="hidden-md-and-up"
       @click="
         $router.push({
           path: 'login',
-          query: { mess: 'needLogin' },
+          query: { mess: 'needLogin' }
         })
       "
     >
       <v-icon>mdi-login</v-icon>
+    </v-btn>
+    <v-btn v-if="isLoggedIn" icon class="hidden-md-and-up" @click="logout">
+      <v-icon>mdi-logout</v-icon>
     </v-btn>
 
     <v-menu bottom left>
@@ -91,20 +106,25 @@
 export default {
   data: () => ({
     lang: [
-      { title: 'En', value: 'English', lang: 'eng' },
-      { title: 'Ру', value: 'Русский', lang: 'rus' },
-      { title: 'Ук', value: 'Украинский', lang: 'ukr' },
+      { title: "En", value: "English", lang: "eng" },
+      { title: "Ру", value: "Русский", lang: "rus" },
+      { title: "Ук", value: "Украинский", lang: "ukr" }
     ],
     selectedLang:
-      process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(',').indexOf(
-        localStorage.getItem('currentLanguage') || 'eng'
-      ) || 0,
+      process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(",").indexOf(
+        localStorage.getItem("currentLanguage") || "eng"
+      ) || 0
   }),
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
   methods: {
     switchLocale(locale) {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
-        localStorage.setItem('currentLanguage', locale);
+        localStorage.setItem("currentLanguage", locale);
       }
     },
     changeTheme() {
@@ -112,10 +132,13 @@ export default {
         ? (this.$vuetify.theme.dark = false)
         : (this.$vuetify.theme.dark = true);
       localStorage.setItem(
-        'theme',
-        this.$vuetify.theme.dark ? 'dark' : 'light'
+        "theme",
+        this.$vuetify.theme.dark ? "dark" : "light"
       );
     },
-  },
+    logout() {
+      console.log("logged out");
+    }
+  }
 };
 </script>

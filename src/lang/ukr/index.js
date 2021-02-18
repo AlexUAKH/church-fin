@@ -8,5 +8,7 @@ export default {
   income: "Надходження", //"Income"
   outcome: "Витрати", //"Outcome"
   offering: "Пожертвувати", //"Offering"
-  profile: "Профіль"
+  profile: "Профіль",
+  save: "Зберегти",
+  cansel: "Скасувати"
 };
