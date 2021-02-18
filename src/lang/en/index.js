@@ -10,5 +10,7 @@ export default {
   offering: "Offering",
   profile: "Profile",
   save: "Save",
-  cansel: "Cansel"
+  cansel: "Cansel",
+  updateVal: "Update valuies",
+  deleteConfirm: "Are you sure you want to delete this item?"
 };

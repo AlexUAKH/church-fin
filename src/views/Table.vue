@@ -10,40 +10,34 @@
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
+                <span class="headline">{{ $t("message.updateVal") }}</span>
               </v-card-title>
 
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="6" md="4">
+                    <v-col cols="12">
                       <v-text-field
-                        v-model="editedItem.name"
-                        label="Dessert name"
+                        v-model="editedItem.title"
+                        label="Title"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
+                        v-model="editedItem.uah"
+                        label="Grivna"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
+                        v-model="editedItem.usd"
+                        label="Usd"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
+                        v-model="editedItem.eur"
+                        label="Euro"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -53,10 +47,10 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                  {{ $t("message.cansel") }}
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="save">
-                  Save
+                  {{ $t("message.save") }}
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -64,14 +58,14 @@
 
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="headline"
-                >Are you sure you want to delete this item?</v-card-title
-              >
+              <v-card-title class="headline">
+                {{ $t("message.deleteConfirm") }}
+              </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
+                <v-btn color="blue darken-1" text @click="closeDelete">
+                  {{ $t("message.cansel") }}
+                </v-btn>
                 <v-btn color="blue darken-1" text @click="deleteItemConfirm"
                   >OK</v-btn
                 >
@@ -86,11 +80,11 @@
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        <v-btn>kkkk</v-btn>
         <v-icon small @click="deleteItem(item)">
           mdi-delete
         </v-icon>
       </template>
+
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize">
           Reset
@@ -149,33 +143,23 @@ export default {
         sortable: false,
         value: "title"
       },
-      { text: "Grivna", value: "uah" },
-      { text: "Dollar", value: "usd" },
-      { text: "Euro", value: "eur" }
+      { text: "Grivna", value: "uah", sortable: false },
+      { text: "Dollar", value: "usd", sortable: false },
+      { text: "Euro", value: "eur", sortable: false },
+      { text: "Actions", value: "actions", sortable: false }
     ],
     items: [],
     editedIndex: -1,
     editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      title: "",
+      uah: 0,
+      usd: 0,
+      eur: 0
     }
   }),
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
-    },
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
     }
   },
   watch: {
@@ -198,26 +182,25 @@ export default {
       this.snackText = "Canceled";
     },
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.items.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
     close() {
       this.dialog = false;
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
     },
@@ -225,7 +208,6 @@ export default {
     closeDelete() {
       this.dialogDelete = false;
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
     },
@@ -234,11 +216,8 @@ export default {
       this.snack = true;
       this.snackColor = "success";
       this.snackText = "Data saved";
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
+      Object.assign(this.items[this.editedIndex], this.editedItem);
+
       this.close();
     }
   },

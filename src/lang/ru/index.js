@@ -10,5 +10,7 @@ export default {
   offering: "Пожертвования", //"Offering"
   profile: "Профиль", //"Profile"
   save: "Сохранить",
-  cansel: "Отмена"
+  cansel: "Отмена",
+  updateVal: "Изменить значения", //"Update valuies"
+  deleteConfirm: "Уверены, что хотите удалить?"
 };
