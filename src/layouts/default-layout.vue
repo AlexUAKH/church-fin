@@ -8,10 +8,10 @@
 
     <v-main>
       <v-row style="height: 100%">
-        <v-col cols="3" class="hidden-sm-and-down">
+        <v-col cols="3" class="hidden-sm-and-down pr-0">
           <v-nav-menu></v-nav-menu>
         </v-col>
-        <v-col>
+        <v-col class="pl-md-0">
           <v-container fluid>
             <keep-alive>
               <router-view></router-view>

@@ -1,6 +1,23 @@
 <template>
-  <div>
-    <v-data-table :headers="headers" :items="items" class="elevation-1">
+  <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="
+        items.filter(i =>
+          i.title.toLowerCase().includes(this.search.toLowerCase())
+        )
+      "
+      class="elevation-1"
+    >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Finances</v-toolbar-title>
@@ -20,24 +37,29 @@
                       <v-text-field
                         v-model="editedItem.title"
                         label="Title"
+                        :rules="[max25chars]"
+                        counter="25"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.uah"
                         label="Grivna"
+                        :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.usd"
                         label="Usd"
+                        :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.eur"
                         label="Euro"
+                        :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -86,9 +108,7 @@
       </template>
 
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">
-          Reset
-        </v-btn>
+        No data to show
       </template>
     </v-data-table>
 
@@ -101,7 +121,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -120,6 +140,76 @@ const mokeData = [
     uah: 19000,
     usd: 100,
     eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
+  },
+  {
+    date: "5.02.21",
+    title: "Rent",
+    uah: 19000,
+    usd: 100,
+    eur: ""
   }
 ];
 export default {
@@ -127,10 +217,11 @@ export default {
     snack: false,
     snackColor: "",
     snackText: "",
+    search: "",
     dialog: false,
     dialogDelete: false,
-    max25chars: (v) => v.length <= 25 || "Input too long!",
-    pagination: {},
+    max25chars: v => v.length <= 25 || "Input too long!",
+    isNumerik: v => Math.sign(v) > 0 || "Must be an number",
     headers: [
       {
         text: "Date",
