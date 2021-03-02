@@ -66,7 +66,8 @@ export default {
           text: this.$t("message.login"),
           icon: "mdi-login",
           to: "login",
-          quest: true
+          quest: true,
+          name: "login"
         },
         {
           text: this.$t("message.logout"),
@@ -79,9 +80,9 @@ export default {
     menuItems() {
       const user = this.$store.getters.isLoggedIn;
       if (user) {
-        return this.items.filter((i) => i.text !== "Sign In");
+        return this.items.filter(i => i.name !== "login");
       } else {
-        return this.items.filter((i) => i.quest === true);
+        return this.items.filter(i => i.quest === true);
       }
     }
   }

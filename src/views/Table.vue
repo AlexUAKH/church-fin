@@ -98,11 +98,15 @@
         </v-toolbar>
       </template>
 
+      <template v-slot:item.title="{ item }">
+        <v-chip :color="getColor(item.act)" dark> {{ item.title }}</v-chip>
+      </template>
+
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
+        <v-icon small class="mx-1" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        <v-icon small @click="deleteItem(item)">
+        <v-icon small class="mx-1" @click="deleteItem(item)">
           mdi-delete
         </v-icon>
       </template>
@@ -130,6 +134,7 @@ const mokeData = [
   {
     date: "1.02.21",
     title: "Church offering",
+    act: "add",
     uah: 12000,
     usd: "",
     eur: 240
@@ -137,6 +142,7 @@ const mokeData = [
   {
     date: "5.02.21",
     title: "Rent",
+    act: "dec",
     uah: 19000,
     usd: 100,
     eur: ""
@@ -221,7 +227,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     max25chars: v => v.length <= 25 || "Input too long!",
-    isNumerik: v => Math.sign(v) > 0 || "Must be an number",
+    isNumerik: v => Math.sign(v) > 0 || v === "" || "Must be an number",
     headers: [
       {
         text: "Date",
@@ -310,6 +316,11 @@ export default {
       Object.assign(this.items[this.editedIndex], this.editedItem);
 
       this.close();
+    },
+    getColor(action) {
+      if (action === "add") return "green";
+      else if (action === "dec") return "red";
+      else return "none";
     }
   },
   mounted() {}
