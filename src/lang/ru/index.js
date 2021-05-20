@@ -12,5 +12,6 @@ export default {
   save: "Сохранить",
   cansel: "Отмена",
   updateVal: "Изменить значения", //"Update valuies"
-  deleteConfirm: "Уверены, что хотите удалить?"
+  deleteConfirm: "Уверены, что хотите удалить?",
+  reset: "Сбросить"
 };

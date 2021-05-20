@@ -137,6 +137,7 @@ export default {
       );
     },
     logout() {
+      this.$router.push("logout");
       console.log("logged out");
     }
   }

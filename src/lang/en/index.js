@@ -12,5 +12,7 @@ export default {
   save: "Save",
   cansel: "Cansel",
   updateVal: "Update valuies",
-  deleteConfirm: "Are you sure you want to delete this item?"
+  deleteConfirm: "Are you sure you want to delete this item?",
+  reset: "Reset",
+  maxLength: "Input too long!"
 };

@@ -18,6 +18,18 @@ const routes = [
     component: () => import("../views/Table.vue")
   },
   {
+    path: "/income",
+    name: "Income",
+    meta: "main",
+    component: () => import("../views/Income.vue")
+  },
+  {
+    path: "/outcome",
+    name: "Outcome",
+    meta: "main",
+    component: () => import("../views/Income.vue")
+  },
+  {
     path: "/analitic",
     name: "Analitic",
     meta: "main",
@@ -28,6 +40,12 @@ const routes = [
     name: "Login",
     meta: "empty",
     component: () => import("../views/Login.vue")
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    meta: "empty",
+    component: () => import("../views/Logout.vue")
   },
   {
     path: "**",

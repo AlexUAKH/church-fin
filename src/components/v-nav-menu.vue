@@ -41,7 +41,7 @@ export default {
         {
           text: this.$t("message.income"),
           icon: "mdi-arrow-right",
-          to: "invome",
+          to: "income",
           quest: false
         },
         {

@@ -20,6 +20,9 @@
       <v-row justify="center">
         <v-col class="subtitle-1 text-center" cols="12">
           <h2>Welcome back</h2>
+          <h3 v-if="accountError" class="red--text">
+            E-mail or password are incorrect
+          </h3>
 
           <v-card flat>
             <form>
@@ -42,7 +45,7 @@
                 @blur="$v.password.$touch()"
               ></v-text-field>
               <v-checkbox
-                v-model="checkbox"
+                v-model="staySignedIn"
                 label="Stay signed in?"
               ></v-checkbox>
 
@@ -72,13 +75,16 @@ export default {
     password: { required }
   },
 
-  data: () => ({
-    loading: false,
-    email: "",
-    password: "",
-    passwordVisible: false,
-    checkbox: false
-  }),
+  data() {
+    return {
+      loading: false,
+      email: "test@test.com",
+      password: "testtest",
+      passwordVisible: false,
+      accountError: false,
+      staySignedIn: false
+    };
+  },
 
   computed: {
     emailErrors() {
@@ -91,23 +97,42 @@ export default {
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
-      this.passwordError && errors.push("Password is incorrect");
       !this.$v.password.required && errors.push("Password is required");
       return errors;
     }
   },
-
+  watch: {
+    email() {
+      if (this.accountError) this.accountError = false;
+    },
+    password() {
+      if (this.accountError) this.accountError = false;
+    }
+  },
   methods: {
-    submit() {
+    async submit() {
       this.$v.$touch();
-      this.loading = true;
-      setTimeout(() => (this.loading = false), 2500);
+      if (!this.$v.$invalid) {
+        const user = {
+          email: this.email,
+          password: this.password,
+          staySignedIn: this.staySignedIn
+        };
+        this.loading = true;
+        const res = await this.$store.dispatch("loginUser", user);
+        if (res === "success") {
+          this.$router.push("/");
+        } else {
+          this.accountError = true;
+          this.loading = false;
+        }
+      }
     },
     clear() {
       this.$v.$reset();
       this.email = "";
       this.password = "";
-      this.checkbox = false;
+      this.staySignedIn = false;
     }
   }
 };

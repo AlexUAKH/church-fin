@@ -9,15 +9,7 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="
-        items.filter(i =>
-          i.title.toLowerCase().includes(this.search.toLowerCase())
-        )
-      "
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="filteredItems" class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Finances</v-toolbar-title>
@@ -102,7 +94,7 @@
         <v-chip :color="getColor(item.act)" dark> {{ item.title }}</v-chip>
       </template>
 
-      <template v-slot:item.actions="{ item }">
+      <template v-if="isLoggedIn" v-slot:item.actions="{ item }">
         <v-icon small class="mx-1" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -129,14 +121,14 @@
 </template>
 
 <script>
-//import dateFilter from "../filters/data-filter";
+import { maxChars, isNumerik } from "@/helpers/vualidateFunctions";
 const mokeData = [
   {
     date: "1.02.21",
     title: "Church offering",
     act: "add",
     uah: 12000,
-    usd: "",
+    usd: "-",
     eur: 240
   },
   {
@@ -226,25 +218,8 @@ export default {
     search: "",
     dialog: false,
     dialogDelete: false,
-    max25chars: v => v.length <= 25 || "Input too long!",
-    isNumerik: v => Math.sign(v) > 0 || v === "" || "Must be an number",
-    headers: [
-      {
-        text: "Date",
-        sortable: false,
-        value: "date"
-      },
-      {
-        text: "",
-        align: "start",
-        sortable: false,
-        value: "title"
-      },
-      { text: "Grivna", value: "uah", sortable: false },
-      { text: "Dollar", value: "usd", sortable: false },
-      { text: "Euro", value: "eur", sortable: false },
-      { text: "Actions", value: "actions", sortable: false }
-    ],
+    max25chars: v => maxChars(v, 25),
+    isNumerik: v => isNumerik(v),
     items: [],
     editedIndex: -1,
     editedItem: {
@@ -255,8 +230,35 @@ export default {
     }
   }),
   computed: {
+    filteredItems() {
+      return this.items.filter(i =>
+        i.title.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    headers() {
+      const head = [
+        {
+          text: "Date",
+          sortable: false,
+          value: "date"
+        },
+        {
+          text: "",
+          align: "start",
+          sortable: false,
+          value: "title"
+        },
+        { text: "Grivna", value: "uah", align: "center", sortable: false },
+        { text: "Dollar", value: "usd", align: "center", sortable: false },
+        { text: "Euro", value: "eur", align: "center", sortable: false }
+      ];
+      if (this.isLoggedIn) {
+        head.push({ text: "Actions", value: "actions", sortable: false });
+      }
+      return head;
     }
   },
   watch: {
@@ -268,7 +270,7 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     this.items = mokeData;
   },
 
@@ -312,7 +314,7 @@ export default {
     save() {
       this.snack = true;
       this.snackColor = "success";
-      this.snackText = "Data saved";
+      this.snackText = "Changes saved";
       Object.assign(this.items[this.editedIndex], this.editedItem);
 
       this.close();
@@ -322,7 +324,6 @@ export default {
       else if (action === "dec") return "red";
       else return "none";
     }
-  },
-  mounted() {}
+  }
 };
 </script>

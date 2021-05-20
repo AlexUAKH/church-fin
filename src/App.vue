@@ -23,6 +23,10 @@ export default {
   data: () => ({
     //
   }),
+  async mounted() {
+    let user = localStorage.getItem("userId");
+    if (user) this.$store.state.user.user = user;
+  },
   methods: {}
 };
 </script>
