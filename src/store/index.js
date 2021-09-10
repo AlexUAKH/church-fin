@@ -1,14 +1,22 @@
+// Vue
 import Vue from "vue";
 import Vuex from "vuex";
-
-import common from "./common";
-import user from "./user";
+// Modules
+import * as modules from "./modules";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  modules: {
-    common,
-    user
-  }
+const store = new Vuex.Store({
+  modules,
+  plugins: []
 });
+
+store.subscribe(() => {
+  //if (!mutation.type.startsWith("user/")) return;
+  //store.dispatch("user/update", mutation);
+});
+
+// store.dispatch("app/init");
+// store.dispatch("user/checkAuth");
+
+export default store;

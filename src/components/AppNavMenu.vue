@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="300" tile style="height:100%">
+  <v-card class="mx-auto" flat max-width="300" tile style="height:100%">
     <v-list nav>
       <v-list-item-group color="primary">
         <v-list-item
@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: "AppNavMenu",
   data: () => ({}),
   computed: {
     items() {
@@ -41,7 +42,7 @@ export default {
         {
           text: this.$t("message.income"),
           icon: "mdi-arrow-right",
-          to: "invome",
+          to: "income",
           quest: false
         },
         {
@@ -52,7 +53,7 @@ export default {
         },
         {
           text: this.$t("message.offering"),
-          icon: "mdi-poll",
+          icon: "mdi-share-all-outline",
           to: "offering",
           quest: true
         },
@@ -78,7 +79,7 @@ export default {
       ];
     },
     menuItems() {
-      const user = this.$store.getters.isLoggedIn;
+      const user = this.$store.state.user.user;
       if (user) {
         return this.items.filter(i => i.name !== "login");
       } else {

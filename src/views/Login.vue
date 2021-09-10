@@ -20,11 +20,15 @@
       <v-row justify="center">
         <v-col class="subtitle-1 text-center" cols="12">
           <h2>Welcome back</h2>
+          <h3 v-if="accountError" class="red--text">
+            E-mail or password are incorrect
+          </h3>
 
           <v-card flat>
             <form>
               <v-text-field
                 v-model="email"
+                type="email"
                 :error-messages="emailErrors"
                 label="E-mail"
                 required
@@ -77,6 +81,7 @@ export default {
     email: "",
     password: "",
     passwordVisible: false,
+    accountError: false,
     checkbox: false
   }),
 
@@ -91,17 +96,48 @@ export default {
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
-      this.passwordError && errors.push("Password is incorrect");
       !this.$v.password.required && errors.push("Password is required");
       return errors;
     }
   },
-
+  watch: {
+    email() {
+      if (this.accountError) this.accountError = false;
+    },
+    password() {
+      if (this.accountError) this.accountError = false;
+    }
+  },
   methods: {
     submit() {
       this.$v.$touch();
-      this.loading = true;
-      setTimeout(() => (this.loading = false), 2500);
+      if (!this.$v.$invalid) {
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+        this.loading = true;
+        this.$store
+          .dispatch("user/loginUser", user)
+          .then(user => {
+            if (this.checkbox) localStorage.setItem("userId", user.uid);
+            this.$store.dispatch("common/showMessage", {
+              type: "success",
+              message: "You logged in successfully"
+            });
+            this.loading = false;
+            this.clear();
+            this.$router.push("/");
+          })
+          .catch(message => {
+            this.$store.dispatch("common/showMessage", {
+              type: "success",
+              message
+            });
+            this.accountError = true;
+            this.loading = false;
+          });
+      }
     },
     clear() {
       this.$v.$reset();

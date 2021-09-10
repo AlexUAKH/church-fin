@@ -1,28 +1,11 @@
 <template>
-  <component :is="layout"></component>
+  <v-fade-transition mode="out-in">
+    <router-view />
+  </v-fade-transition>
 </template>
 
 <script>
-import EmptyLayout from "@/layouts/empty-layout";
-import DefaultLayout from "@/layouts/default-layout";
-
 export default {
-  name: "App",
-
-  components: {
-    EmptyLayout,
-    DefaultLayout
-  },
-
-  computed: {
-    layout() {
-      return this.$route.meta === "main" ? "default-layout" : "empty-layout";
-    }
-  },
-
-  data: () => ({
-    //
-  }),
-  methods: {}
+  name: "App"
 };
 </script>

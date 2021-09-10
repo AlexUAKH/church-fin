@@ -1,0 +1,18 @@
+{
+  "a": "a",
+
+  "login": "Увійти",
+  "logout": "Вийти",
+  "language": "Мова",
+  "dateRange": "Проміжок часу",
+  "dashboard": "Статистика",
+  "table": "Таблиця",
+  "income": "Надходження",
+  "outcome": "Витрати",
+  "offering": "Пожертвувати",
+  "profile": "Профіль",
+  "save": "Зберегти",
+  "cansel": "Скасувати",
+  "updateVal": "Змінити данні",
+  "deleteConfirm": "Ви впе"
+}
