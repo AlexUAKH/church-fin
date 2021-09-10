@@ -6,6 +6,11 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  async mounted() {
+    let user = localStorage.getItem("userId");
+    if (user) this.$store.state.user.user = user;
+  },
+  methods: {}
 };
 </script>

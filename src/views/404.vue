@@ -1,7 +1,6 @@
 <template>
   <v-card class="mx-auto">
     <v-img
-      :lazy-src="require('@/assets/no_photo.png')"
       :src="require('@/assets/404.png')"
       class="white--text align-end mx-auto"
       contain

@@ -46,7 +46,7 @@
                 @blur="$v.password.$touch()"
               ></v-text-field>
               <v-checkbox
-                v-model="checkbox"
+                v-model="staySignedIn"
                 label="Stay signed in?"
               ></v-checkbox>
 
@@ -82,7 +82,8 @@ export default {
     password: "",
     passwordVisible: false,
     accountError: false,
-    checkbox: false
+    checkbox: false,
+    staySignedIn: false
   }),
 
   computed: {
@@ -109,7 +110,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    async submit() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         const user = {
@@ -143,7 +144,7 @@ export default {
       this.$v.$reset();
       this.email = "";
       this.password = "";
-      this.checkbox = false;
+      this.staySignedIn = false;
     }
   }
 };

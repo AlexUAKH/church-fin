@@ -116,7 +116,7 @@
         <v-chip :color="getColor(item.act)" dark> {{ item.title }}</v-chip>
       </template>
 
-      <template v-slot:item.actions="{ item }">
+      <template v-if="isLoggedIn" v-slot:item.actions="{ item }">
         <v-icon small class="mx-1" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -161,8 +161,8 @@ export default {
     search: "",
     dialog: false,
     dialogDelete: false,
-    max25chars: v => v.length <= 25 || "Input too long!",
-    isNumerik: v => Math.sign(v) >= 0 || v === "" || "Must be an number",
+    max25chars: v => maxChars(v, 25),
+    isNumerik: v => isNumerik(v),
     items: [],
     direction: "",
     editedIndex: -1,
@@ -180,6 +180,11 @@ export default {
     }
   }),
   computed: {
+    filteredItems() {
+      return this.items.filter(i =>
+        i.title.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
     isLoggedIn() {
       //return this.$store.getters.isLoggedIn;
       return !!this.$store.state.user.user;
@@ -197,9 +202,9 @@ export default {
           sortable: false,
           value: "title"
         },
-        { text: "Grivna", value: "uah", sortable: false },
-        { text: "Dollar", value: "usd", sortable: false },
-        { text: "Euro", value: "eur", sortable: false }
+        { text: "Grivna", value: "uah", align: "center", sortable: false },
+        { text: "Dollar", value: "usd", align: "center", sortable: false },
+        { text: "Euro", value: "eur", align: "center", sortable: false }
       ];
       if (this.isLoggedIn) {
         head.push({ text: "Actions", value: "actions", sortable: false });
@@ -319,7 +324,6 @@ export default {
       this.snackColor = "error";
       this.snackText = err;
     }
-  },
-  mounted() {}
+  }
 };
 </script>
