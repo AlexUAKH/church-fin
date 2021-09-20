@@ -28,50 +28,50 @@ export default {
     items() {
       return [
         {
-          text: this.$t("message.dashboard"),
+          text: this.$t("menu.dashboard"),
           icon: "mdi-home",
           to: "/",
           quest: true
         },
         {
-          text: this.$t("message.table"),
+          text: this.$t("menu.table"),
           icon: "mdi-table",
           to: "table",
           quest: true
         },
         {
-          text: this.$t("message.income"),
+          text: this.$t("menu.income"),
           icon: "mdi-arrow-right",
           to: "income",
           quest: false
         },
         {
-          text: this.$t("message.outcome"),
+          text: this.$t("menu.outcome"),
           icon: "mdi-arrow-left",
           to: "outcome",
           quest: false
         },
         {
-          text: this.$t("message.offering"),
+          text: this.$t("menu.offering"),
           icon: "mdi-share-all-outline",
           to: "offering",
           quest: true
         },
         {
-          text: this.$t("message.profile"),
+          text: this.$t("menu.profile"),
           icon: "mdi-account",
           to: "profile",
           quest: false
         },
         {
-          text: this.$t("message.login"),
+          text: this.$t("app.login"),
           icon: "mdi-login",
           to: "login",
           quest: true,
           name: "login"
         },
         {
-          text: this.$t("message.logout"),
+          text: this.$t("menu.logout"),
           icon: "mdi-logout",
           to: "logout",
           quest: false

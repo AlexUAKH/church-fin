@@ -14,7 +14,7 @@
     </template>
 
     <v-list flat>
-      <v-subheader>{{ $t("message.language") }}</v-subheader>
+      <v-subheader>{{ $t("app.language") }}</v-subheader>
       <v-divider></v-divider>
       <v-list-item-group>
         <v-list-item
@@ -41,10 +41,6 @@ export default {
         rus: { title: "Русский", shortTitle: "Рус" },
         ukr: { title: "Украинский", shortTitle: "Укр" }
       }
-      // selectedLang:
-      //   process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(",").indexOf(
-      //     localStorage.getItem("currentLanguage") || "eng"
-      //   ) || 0
     };
   },
   computed: {
@@ -56,7 +52,7 @@ export default {
     switchLocale(locale) {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
-        localStorage.setItem("currentLanguage", locale);
+        localStorage.setItem("locale", locale);
       }
     }
   }

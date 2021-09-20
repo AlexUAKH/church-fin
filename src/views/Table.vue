@@ -4,31 +4,30 @@
       :loading="loading"
       loading-text="Loading... Please wait"
       :headers="headers"
-      :items="filteredItems"
+      :items="filteredRecords"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title class="hidden-md-and-down "
-            >Finances</v-toolbar-title
-          >
-          <v-divider class="mx-4 hidden-md-and-down" inset vertical></v-divider>
+          <v-toolbar-title class="hidden-md-and-down ">
+            {{ $t("table.title") }}
+          </v-toolbar-title>
 
           <v-spacer class="hidden-md-and-down"></v-spacer>
 
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            :label="$t('table.search')"
+            class="mr-8"
             single-line
             hide-details
           ></v-text-field>
-          <v-divider class="mx-4" inset vertical></v-divider>
 
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog v-model="dialog" max-width="500px" v-if="isLoggedIn">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                {{ $t("message.newVal") }}
+                {{ $t("table.add") }}
               </v-btn>
             </template>
             <v-card>
@@ -42,9 +41,10 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="editedItem.title"
-                        label="Title"
+                        :label="$t('table.record.title')"
                         :rules="[max25chars]"
                         counter="25"
+                        maxlength="25"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -58,21 +58,21 @@
                     <v-col cols="4">
                       <v-text-field
                         v-model="editedItem.uah"
-                        label="Grivna"
+                        :label="$t('table.record.grn')"
                         :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="4">
                       <v-text-field
                         v-model="editedItem.usd"
-                        label="Usd"
+                        :label="$t('table.record.usd')"
                         :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="4">
                       <v-text-field
                         v-model="editedItem.eur"
-                        label="Euro"
+                        :label="$t('table.record.euro')"
                         :rules="[isNumerik]"
                       ></v-text-field>
                     </v-col>
@@ -83,10 +83,10 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  {{ $t("message.cansel") }}
+                  {{ $t("table.cancel") }}
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="save">
-                  {{ $t("message.save") }}
+                  {{ $t("table.save") }}
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -116,6 +116,10 @@
         <v-chip :color="getColor(item.act)" dark> {{ item.title }}</v-chip>
       </template>
 
+      <template v-slot:item.date="{ item }">
+        {{ new Date(item.date).getFullYear() }}
+      </template>
+
       <template v-if="isLoggedIn" v-slot:item.actions="{ item }">
         <v-icon small class="mx-1" @click="editItem(item)">
           mdi-pencil
@@ -126,7 +130,7 @@
       </template>
 
       <template v-slot:no-data>
-        No data to show
+        {{ $t("table.no-data") }}
       </template>
     </v-data-table>
 
@@ -150,7 +154,6 @@
 </template>
 
 <script>
-import { fetchData, saveData } from "@/services/firebaseDataService";
 import { maxChars, isNumerik } from "../helpers/vualidateFunctions";
 
 export default {
@@ -181,8 +184,11 @@ export default {
     }
   }),
   computed: {
-    filteredItems() {
-      return this.items.filter(i =>
+    records() {
+      return this.$store.state.records.records;
+    },
+    filteredRecords() {
+      return this.records.filter(i =>
         i.title.toLowerCase().includes(this.search.toLowerCase())
       );
     },
@@ -193,19 +199,34 @@ export default {
     headers() {
       let head = [
         {
-          text: "Date",
+          text: this.$t("table.record.date"),
           sortable: false,
           value: "date"
         },
         {
-          text: "Tile",
+          text: this.$t("table.record.title"),
           align: "start",
           sortable: false,
           value: "title"
         },
-        { text: "Grivna", value: "uah", align: "center", sortable: false },
-        { text: "Dollar", value: "usd", align: "center", sortable: false },
-        { text: "Euro", value: "eur", align: "center", sortable: false }
+        {
+          text: this.$t("table.record.grn"),
+          value: "uah",
+          align: "center",
+          sortable: false
+        },
+        {
+          text: this.$t("table.record.usd"),
+          value: "usd",
+          align: "center",
+          sortable: false
+        },
+        {
+          text: this.$t("table.record.euro"),
+          value: "eur",
+          align: "center",
+          sortable: false
+        }
       ];
       if (this.isLoggedIn) {
         head.push({ text: "Actions", value: "actions", sortable: false });
@@ -214,11 +235,11 @@ export default {
     },
     formTitle() {
       return this.editedIndex === -1
-        ? this.$t("message.newVal")
-        : this.$t("message.updateVal");
+        ? this.$t("table.add")
+        : this.$t("table.updateVal");
     },
     dir() {
-      return [this.$t("message.income"), this.$t("message.outcome")];
+      return [this.$t("menu.income"), this.$t("menu.outcome")];
     },
     firstDir() {
       return this.dir[0];
@@ -237,17 +258,11 @@ export default {
   },
 
   created() {
-    fetchData()
-      .then(res => {
-        console.log("fetched data: ", res);
-        this.items = [...res];
-        this.loading = false;
-      })
-      .catch(e => {
-        this.loading = false;
-        this.errorMessage(e);
-      });
     this.direction = this.dir[0];
+    this.$store
+      .dispatch("records/getRecords")
+      .then(() => (this.loading = false))
+      .catch(() => this.errorMessage("Somyhing went wrong"));
   },
 
   methods: {
@@ -295,18 +310,18 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        saveData(this.editedItem)
-          .then(res => {
-            this.snack = true;
-            this.snackColor = "success";
-            this.snackText = "Data saved";
-            this.items.push(this.editedItem);
-            console.log("res save: ", res);
-            this.close();
-          })
-          .catch(e => {
-            this.errorMessage(e);
-          });
+        // saveData(this.editedItem)
+        //   .then(res => {
+        //     this.snack = true;
+        //     this.snackColor = "success";
+        //     this.snackText = this.$t("messages.saved-success");
+        //     this.items.push(this.editedItem);
+        //     console.log("res save: ", res);
+        //     this.close();
+        //   })
+        //   .catch(e => {
+        //     this.errorMessage(e);
+        //   });
         //this.items= [...this.items, this.editedItem];
       }
     },

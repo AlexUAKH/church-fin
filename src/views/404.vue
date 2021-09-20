@@ -16,15 +16,17 @@
         </v-row>
       </template>
     </v-img>
-    <v-card-title>Страница не найдена</v-card-title>
+    <v-card-title>
+      {{ $t("404.not-found") }}
+    </v-card-title>
     <v-card-actions>
       <v-btn text color="warning">
         <v-icon>mdi-arrow-left</v-icon>
-        Назад
+        {{ $t("app.back") }}
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn text color="warning">
-        Главная
+        {{ $t("app.home") }}
         <v-icon>mdi-home</v-icon>
       </v-btn>
     </v-card-actions>

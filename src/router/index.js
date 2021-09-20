@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+//import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -10,16 +10,16 @@ const routes = [
     component: () => import("@/layouts/EmptyLayout.vue"),
     children: [
       {
-        path: "auth/login",
+        path: "/auth/login",
         name: "login",
         meta: { auth: 0 },
-        component: () => import("../views/Login.vue")
+        component: () => import("../views/signup/Login.vue")
       },
       {
-        path: "auth/logout",
+        path: "/auth/logout",
         name: "logout",
         meta: { auth: 0 },
-        component: () => import("../views/Logout.vue")
+        component: () => import("../views/signup/Logout.vue")
       }
     ]
   },
@@ -32,7 +32,7 @@ const routes = [
         path: "/",
         name: "Home",
         meta: { auth: 0 },
-        component: Home
+        component: () => import("../views/InProgress.vue")
       },
       {
         path: "/table",
@@ -50,7 +50,7 @@ const routes = [
         path: "/analitic",
         name: "Analitic",
         meta: { auth: 0 },
-        component: () => import("../views/In-progress.vue")
+        component: () => import("../views/InProgress.vue")
       },
 
       {

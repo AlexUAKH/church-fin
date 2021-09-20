@@ -1,8 +1,6 @@
 const state = {
   currentLanguage:
-    localStorage.getItem("currentLanguage") ||
-    process.env.VUE_APP_I18N_LOCALE ||
-    "ukr",
+    localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE || "ukr",
   snack: {}
 };
 const mutations = {

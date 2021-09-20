@@ -3,8 +3,8 @@ import "firebase/database";
 import axios from "../plugins/axios";
 
 const BASE_URL =
-  "https://church-fin-default-rtdb.europe-west1.firebasedatabase.app/";
-const DATA_URL = BASE_URL + "data";
+  "https://church-fin-default-rtdb.europe-west1.firebasedatabase.app";
+const DATA_URL = `${BASE_URL}/data.json`;
 
 export const fetchData = () => {
   return new Promise((resolve, reject) => {
@@ -22,9 +22,8 @@ export const fetchData = () => {
 
 export const saveData = data => {
   return new Promise((resolve, reject) => {
-    const url = `${DATA_URL}.json`;
     axios
-      .post(url, data)
+      .post(DATA_URL, data)
       .then(res => {
         resolve(res);
       })

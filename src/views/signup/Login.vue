@@ -122,16 +122,18 @@ export default {
           .dispatch("user/loginUser", user)
           .then(user => {
             if (this.checkbox) localStorage.setItem("userId", user.uid);
-            this.$store.dispatch("common/showMessage", {
+            this.$store.dispatch("app/showMessage", {
               type: "success",
               message: "You logged in successfully"
             });
             this.loading = false;
             this.clear();
-            this.$router.push("/");
+            if (this.$route.params.nextUrl) {
+              this.$router.replace(this.$route.params.nextUrl);
+            } else this.$router.push("/table");
           })
           .catch(message => {
-            this.$store.dispatch("common/showMessage", {
+            this.$store.dispatch("app/showMessage", {
               type: "success",
               message
             });

@@ -7,15 +7,17 @@
       height="auto"
     >
     </v-img>
-    <v-card-title>В разработке</v-card-title>
+    <v-card-title>
+      {{ $t("app.in-development") }}
+    </v-card-title>
     <v-card-actions>
       <v-btn text color="warning">
         <v-icon>mdi-arrow-left</v-icon>
-        Назад
+        {{ $t("app.back") }}
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn text color="warning">
-        На главную
+        {{ $t("app.home") }}
         <v-icon>mdi-home</v-icon>
       </v-btn>
     </v-card-actions>

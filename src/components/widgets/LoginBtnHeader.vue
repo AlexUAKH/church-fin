@@ -3,10 +3,10 @@
     <!-- desktop -->
     <template v-if="!isMobile">
       <v-btn v-if="!isLoggedIn" outlined @click="login">
-        <span>{{ $t("message.login") }}</span>
+        <span>{{ $t("app.login") }}</span>
       </v-btn>
       <v-btn v-if="isLoggedIn" outlined @click="logout">
-        <span>{{ $t("message.logout") }}</span>
+        <span>{{ $t("app.logout") }}</span>
       </v-btn>
     </template>
     <!-- mobile -->
@@ -37,11 +37,12 @@ export default {
   methods: {
     login() {
       this.$router.push({
-        path: "login"
+        name: "login",
+        params: { nextUrl: this.$route.path }
       });
     },
     logout() {
-      this.$router.push("logout");
+      this.$router.push("auth/logout");
     }
   }
 };

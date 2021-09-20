@@ -1,18 +1,46 @@
 {
-  "a": "a",
-
-  "login": "Увійти",
-  "logout": "Вийти",
-  "language": "Мова",
-  "dateRange": "Проміжок часу",
-  "dashboard": "Статистика",
-  "table": "Таблиця",
-  "income": "Надходження",
-  "outcome": "Витрати",
-  "offering": "Пожертвувати",
-  "profile": "Профіль",
-  "save": "Зберегти",
-  "cansel": "Скасувати",
-  "updateVal": "Змінити данні",
-  "deleteConfirm": "Ви впе"
+  "app": {
+    "login": "Увійти",
+    "logout": "Вийти",
+    "language": "Мова",
+    "back": "Повернутися",
+    "home": "Головна сторінка",
+    "in-development": "Строрінка в розробці"
+  },
+  "menu": {
+    "dashboard": "Статистика",
+    "table": "Таблиця",
+    "income": "Надходження",
+    "outcome": "Витрати",
+    "offering": "Пожертвувати",
+    "profile": "Профіль"
+  },
+  "table": {
+    "title": "Фінанси",
+    "search": "Пошук",
+    "add": "Додати запис",
+    "dateRange": "Проміжок часу",
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "updateVal": "Змінити данні",
+    "deleteConfirm": "Ви дійсно бажаєте видалити?",
+    "reset": "Reset",
+    "no-data": "Немає данних",
+    "record": {
+      "date": "Дата",
+      "title": "Назва",
+      "grn": "Гривня",
+      "usd": "Долар",
+      "euro": "Євро"
+    }
+  },
+  "404": {
+    "not-found": "Сторінка не знайдена"
+  },
+  "messsages": {
+    "saved-success": "Збережено!!"
+  },
+  "errors": {
+    "maxLength": "Завелика довжина"
+  }
 }

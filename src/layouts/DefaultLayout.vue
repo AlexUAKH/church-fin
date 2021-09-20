@@ -88,8 +88,8 @@ export default {
   },
   methods: {
     closeSnack() {
-      //this.$store.dispatch("common/showMessage", {});
-      this.$store.commit("common/setSnack", {});
+      //this.$store.dispatch("app/showMessage", {});
+      this.$store.commit("app/setSnack", {});
     }
   },
   mounted() {
