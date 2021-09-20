@@ -151,6 +151,7 @@
 
 <script>
 import { fetchData, saveData } from "@/services/firebaseDataService";
+import { maxChars, isNumerik } from "../helpers/vualidateFunctions";
 
 export default {
   data: () => ({
@@ -210,11 +211,6 @@ export default {
         head.push({ text: "Actions", value: "actions", sortable: false });
       }
       return head;
-    },
-    filteredItems() {
-      return this.items.filter(i =>
-        i.title.toLowerCase().includes(this.search.toLowerCase())
-      );
     },
     formTitle() {
       return this.editedIndex === -1

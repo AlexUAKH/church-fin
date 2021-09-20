@@ -64,14 +64,9 @@ export default {
   },
   computed: {
     ...mapGetters("app", ["isSnackVisible"]),
-    // openSnack() {
-    //   return this.$store.state.common.openSnack;
-    // }
     snackMessage() {
       return this.$store.state.app.snack;
     }
-    //,
-    // ...mapGetters(["isSnackVisible"])
   },
   watch: {
     isSnackVisible(val) {

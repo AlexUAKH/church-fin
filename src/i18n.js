@@ -1,19 +1,3 @@
-// import Vue from "vue";
-// import VueI18n from "vue-i18n";
-
-// import messages from "./lang";
-
-// Vue.use(VueI18n);
-
-// export default new VueI18n({
-//   locale:
-//     localStorage.getItem("currentLanguage") ||
-//     process.env.VUE_APP_I18N_LOCALE ||
-//     "eng",
-//   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "eng",
-//   messages
-// });
-
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 
@@ -41,7 +25,7 @@ function loadLocaleMessages() {
 
 export default new VueI18n({
   locale:
-    localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE || "rus",
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "rus",
+    localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE || "ukr",
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "ukr",
   messages: loadLocaleMessages()
 });
