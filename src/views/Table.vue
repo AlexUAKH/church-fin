@@ -117,7 +117,7 @@
       </template>
 
       <template v-slot:item.date="{ item }">
-        {{ new Date(item.date).getFullYear() }}
+        {{ formatedDate(item.date) }}
       </template>
 
       <template v-if="isLoggedIn" v-slot:item.actions="{ item }">
@@ -154,6 +154,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import { maxChars, isNumerik } from "../helpers/vualidateFunctions";
 
 export default {
@@ -266,6 +267,9 @@ export default {
   },
 
   methods: {
+    formatedDate(date) {
+      return moment(date).format("DD MM YYYY");
+    },
     cancel() {
       this.snack = true;
       this.snackColor = "error";
