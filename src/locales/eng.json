@@ -5,7 +5,9 @@
     "language": "Language",
     "back": "Back",
     "home": "Home page",
-    "in-development": "Page in development"
+    "in-development": "Page in development",
+    "save": "Save",
+    "cancel": "Canсel"
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -41,6 +43,8 @@
     "saved-success": "Data saved"
   },
   "errors": {
-    "maxLength": "Input too long!"
+    "maxLength": "Input too long!",
+    "required": "Field is required",
+    "number": "Must be an number"
   }
 }

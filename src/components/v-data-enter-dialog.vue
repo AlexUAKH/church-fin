@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">{{ $t(`message.${title}`) }}</span>
+      <span class="headline">{{ $t(`menu.${title}`) }}</span>
     </v-card-title>
 
     <v-card-text>
@@ -43,10 +43,10 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn color="blue darken-1" text @click="emit('close')">
-        {{ $t("message.cansel") }}
+        {{ $t("app.cansel") }}
       </v-btn>
       <v-btn color="blue darken-1" text @click="emit('save')">
-        {{ $t("message.save") }}
+        {{ $t("app.save") }}
       </v-btn>
     </v-card-actions>
   </v-card>

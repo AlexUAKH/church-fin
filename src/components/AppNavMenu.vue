@@ -71,7 +71,7 @@ export default {
           name: "login"
         },
         {
-          text: this.$t("menu.logout"),
+          text: this.$t("app.logout"),
           icon: "mdi-logout",
           to: "logout",
           quest: false

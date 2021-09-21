@@ -31,7 +31,7 @@
       </template>
 
       <v-list>
-        <v-subheader>{{ $t("message.language") }}</v-subheader>
+        <v-subheader>{{ $t("mesappsage.language") }}</v-subheader>
         <v-divider></v-divider>
         <v-list-item-group v-model="selectedLang">
           <v-list-item v-for="item in lang" :key="item.title">
@@ -59,7 +59,7 @@
         })
       "
     >
-      <span>{{ $t("message.login") }}</span>
+      <span>{{ $t("app.login") }}</span>
     </v-btn>
     <v-btn
       v-if="isLoggedIn"
@@ -67,7 +67,7 @@
       class="hidden-sm-and-down"
       @click="logout"
     >
-      <span>{{ $t("message.logout") }}</span>
+      <span>{{ $t("app.logout") }}</span>
     </v-btn>
     <v-btn
       v-if="!isLoggedIn"
